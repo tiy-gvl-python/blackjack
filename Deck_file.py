@@ -33,6 +33,7 @@ class Deck:
         self.deck = self.remove_from_deck(self.hand)
         # print("and now i'm here", self.deck)
         # print(self.deck)
+        print("This is your hand", self.hand)
         return (self.hand)
 
     def hitme(self):
@@ -42,21 +43,17 @@ class Deck:
         # print("Type Now", type(self.hand))
         # print(self.hand)
         self.hand.append(self.deal)
-        # print(self.hand)
+        print("This is your hand", self.hand)
         # self.deck = Deck.remove_from_deck(self, self.deck, self.deal)
-        return (self.hand)
-
-    def check_16(self):
-        if check_hand(self.hand) == 16:
-            return False
+        # return (self.hand)
 
     def ask(self):
-        self.hit_me_or = input("Hit me? or Stay?")
+        self.hit_me_or = input("Hit me? or Stay? ")
         self.hit_me_or.lower()
         if self.hit_me_or == "hit me":
-            hitme(self)
+            self.hitme()
         elif self.hit_me_or == "stay":
             pass
         else:
             print("Hit me or Stay")
-            ask(self)
+            self.ask()
