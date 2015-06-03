@@ -4,12 +4,7 @@ from card import Card
 
 class Deck():
     def __init__(self):
-        numbers = list(map(str, range(2, 11)))
-        ranks = ['ace', 'king', 'queen', 'jack']
-        ranks.extend(numbers)
-        suits = ['hearts', 'spades', 'diamonds', 'clubs']
-        self._card_list = [Card(suit, rank)
-                           for rank in ranks for suit in suits]
+        self.create_card_list()
         self.shuffle()
 
     @property
@@ -21,6 +16,14 @@ class Deck():
 
     def draw(self):
         return self._card_list.pop()
+
+    def create_card_list(self):
+        numbers = list(map(str, range(2, 11)))
+        ranks = ['ace', 'king', 'queen', 'jack']
+        ranks.extend(numbers)
+        suits = ['hearts', 'spades', 'diamonds', 'clubs']
+        self._card_list = [Card(suit, rank)
+                           for rank in ranks for suit in suits]
 
     @property
     def card_list_display(self):
