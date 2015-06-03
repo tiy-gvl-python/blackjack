@@ -3,57 +3,51 @@ import itertools
 
 
 class Deck:
-    def remove_from_deck(self, deck, remove):
+    # deck = shuffle()
+    def remove_from_deck(self, remove):
         # print(deck)
         # print(remove)
-        self.dec = deck
         try:
             # print(self.dec)
-            self.dec.remove(remove[0])
+            self.deck.remove(remove[0])
             # print(self.dec)
-            self.dec.remove(remove[1])
+            self.deck.remove(remove[1])
             # print(self.dec)
-            return self.dec
+            return self.deck
         except:
-            # self.dec.remove(remove[0])
-            # print(self.dec)
-            return self.dec
+            pass
 
     def shuffle(self):
         self.suits = 'cdhs'
         self.rank = '23456789TJQKA'
-        # print(list(itertools.product(suits, rank)))
-        self.deck = tuple(''.join(card) for card in itertools.product(
+        self.deck = list(''.join(card) for card in itertools.product(
             self.suits, self.rank))
-
-        self.deck = list(self.deck)
         return self.deck
 
-    def init_deal(self, deck):
+    def init_deal(self):
         # print(deck)
-        self.hand = random.sample(deck, 2)
+        # print("i'm here", self.deck)
+        self.hand = random.sample(self.deck, 2)
         # print(self.hand)
+        # print("now i'm here", self.deck)
+        self.deck = self.remove_from_deck(self.hand)
+        # print("and now i'm here", self.deck)
         # print(self.deck)
-        self.deck = Deck.remove_from_deck(self, deck, self.hand)
-        # print(self.deck)
-        return (self.hand, self.deck)
+        return (self.hand)
 
-    def hitme(self, tuple):
-        # print("Tuple", tuple)
-        self.hand = tuple[0]
-        # print("Type", type(self.hand))
-        self.deck = tuple[1]
+    def hitme(self):
+        print(self.deck)
         self.deal = random.choice(self.deck)
         # print("Random Deal", self.deal)
         # print("Type Now", type(self.hand))
         # print(self.hand)
         self.hand.append(self.deal)
         # print(self.hand)
-        self.deck = Deck.remove_from_deck(self, self.deck, self.deal)
-        return (self.hand, self.deck)
+        # self.deck = Deck.remove_from_deck(self, self.deck, self.deal)
+        return (self.hand)
 
     def check_16(self):
-        if check_hand(self) == 16:
+        if check_hand(self.hand) == 16:
             return False
 
     def ask(self):
