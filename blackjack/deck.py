@@ -17,12 +17,12 @@ class Deck():
     def __repr__(self):
         return str(self.card_list)
 
-    def deal(self):
+    def draw(self):
         return self.card_list.pop()
 
 if __name__ == "__main__":
     test_deck = Deck()
     example_card = Card("hearts", "3")
     assert len(test_deck.card_list) == 52
-    assert type(test_deck.deal()) == type(example_card)
+    assert type(test_deck.draw()) == type(example_card)
     assert len(test_deck.card_list) == 51
