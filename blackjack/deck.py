@@ -12,7 +12,7 @@ class Deck():
         return self._card_list
 
     def shuffle(self):
-        random.shuffle(self.card_list)
+        random.shuffle(self._card_list)
 
     def draw(self):
         return self._card_list.pop()
