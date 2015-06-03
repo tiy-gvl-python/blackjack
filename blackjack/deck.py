@@ -8,17 +8,23 @@ class Deck():
         ranks = ['ace', 'king', 'queen', 'jack']
         ranks.extend(numbers)
         suits = ['hearts', 'spades', 'diamonds', 'clubs']
-        self.card_list = [Card(suit, rank) for rank in ranks for suit in suits]
+        self._card_list = [Card(suit, rank)
+                           for rank in ranks for suit in suits]
         self.shuffle()
+
+    @property
+    def card_list(self):
+        return self._card_list
 
     def shuffle(self):
         random.shuffle(self.card_list)
 
-    def __repr__(self):
-        return str(self.card_list)
-
     def draw(self):
-        return self.card_list.pop()
+        return self._card_list.pop()
+
+    @property
+    def card_list_display(self):
+        return '\n'.join(map(str, self._card_list))
 
 if __name__ == "__main__":
     test_deck = Deck()
