@@ -29,6 +29,7 @@ def test_init_hitme(tuple):
 
 def test_card(hand):
     try:
+        print("Enter 11 for test")
         assert new_card.count(hand) == "lose"
     except:
         print("Card.count isnt working")
