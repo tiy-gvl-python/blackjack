@@ -1,0 +1,7 @@
+class hand:
+    ''' *The class hand adds, scores the user hand.
+        *Controls the maximum amount of cards in a hand.
+    '''
+    Collaborators:
+    Player
+    Dealer

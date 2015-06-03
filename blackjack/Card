@@ -1,0 +1,7 @@
+class Card:
+    ''' Defines card values, club, color.
+        Sets value of ace to be determined by the user.
+    '''
+    Collaborators:
+    Deck
+    Hand

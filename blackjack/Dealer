@@ -1,0 +1,9 @@
+class Dealer:
+''' Determines gameplay logic of the dealer/computer.
+    (may be set to alternate difficulties)
+    Computer logic will determine, 'when to hit', 'when to fold', 'showing hand'.
+'''
+Collaborators:
+Game
+Deck
+Hand
