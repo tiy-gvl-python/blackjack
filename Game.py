@@ -13,5 +13,6 @@ new_deck.shuffle()
 new_deck.init_deal()
 while True:
     new_deck.ask()
-    print(new_deck.hand)
-    new_card.count(new_deck.hand)
+    hand = new_deck.hand
+    new_card.count(hand)
+# Count variable and count function are the same

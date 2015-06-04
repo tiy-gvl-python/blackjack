@@ -1,27 +1,27 @@
 class Card:
     def count(self, hand):
-        self.count = 0
+        self.counter = 0
         for card in hand:
             if card[0] == 'A' or card[1] == 'A':
                 self.to_do = input("11 or 1 ")
                 if self.to_do == '11':
-                    self.count += 11
+                    self.counter += 11
                 else:
-                    self.count += 1
+                    self.counter += 1
             else:
                 if card[0].isupper():
-                    self.count += 10
+                    self.counter += 10
                 if card[1].isupper():
-                    self.count += 10
+                    self.counter += 10
                 if card[0].isdigit():
-                    self.count += int(card[0])
+                    self.counter += int(card[0])
                 if card[1].isdigit():
-                    self.count += int(card[1])
-        print("Your count is ", self.count)
-        if self.count == 21:
+                    self.counter += int(card[1])
+        print("Your count is ", self.counter)
+        if self.counter == 21:
             print("blackjack")
             exit()
-        elif self.count > 21:
+        elif self.counter > 21:
             print("Lose")
             exit()
 

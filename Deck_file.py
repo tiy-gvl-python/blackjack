@@ -3,16 +3,10 @@ import itertools
 
 
 class Deck:
-    # deck = shuffle()
     def remove_from_deck(self, remove):
-        # print(deck)
-        # print(remove)
         try:
-            # print(self.dec)
             self.deck.remove(remove[0])
-            # print(self.dec)
             self.deck.remove(remove[1])
-            # print(self.dec)
             return self.deck
         except:
             pass
@@ -25,27 +19,15 @@ class Deck:
         return self.deck
 
     def init_deal(self):
-        # print(deck)
-        # print("i'm here", self.deck)
         self.hand = random.sample(self.deck, 2)
-        # print(self.hand)
-        # print("now i'm here", self.deck)
         self.deck = self.remove_from_deck(self.hand)
-        # print("and now i'm here", self.deck)
-        # print(self.deck)
         print("This is your hand", self.hand)
         return (self.hand)
 
     def hitme(self):
-        print(self.deck)
         self.deal = random.choice(self.deck)
-        # print("Random Deal", self.deal)
-        # print("Type Now", type(self.hand))
-        # print(self.hand)
         self.hand.append(self.deal)
         print("This is your hand", self.hand)
-        # self.deck = Deck.remove_from_deck(self, self.deck, self.deal)
-        # return (self.hand)
 
     def ask(self):
         self.hit_me_or = input("Hit me? or Stay? ")
