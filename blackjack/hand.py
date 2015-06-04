@@ -1,52 +1,77 @@
-"""
-The Hand class will keep a collection of cards.  It will use the rules to
-determine the value of that hand.  It will contain a boolean to keep track of
-whether the hand is busted, and it will contain another boolean to keep track
-of whether the hand is blackjack.  It will have a method that will be used to
-add cards to the hand.
-"""
 class Hand():
     def __init__(self):
         self._card_list = []
         self.score = 0
         self.blackjack = False
         self.busted = False
+        self.soft = False
 
     @property
     def card_list(self):
-        return self.card_list
+        return self._card_list
 
     def get_score(self):
-        return sum([card.value for card in card_list])
+        return sum([card.value for card in self.card_list])
 
     def start_card_value(self, rank):
-        if not card.rank.isalpha() and card.rank != "ace":
-            return int(card.rank)
-        elif card.rank != "ace":
+        if not rank.isalpha() and rank != "ace":
+            return int(rank)
+        elif rank != "ace":
             return 10
         self.soft = True
         return 11
 
-    def reevaluate_score(self):
+    def evaluate_score(self):
         if self.get_score() > 21:
-            for card in self._card_list:
+            for card in self.card_list:
                 if card.rank == "ace" and card.value == 11:
                     card.value = 1
+                    self.soft = False
                     break
-        elif self.get_score == 21:
+        if 11 in [card.value for card in self.card_list]:
+            self.soft = True
+        if self.get_score() == 21:
             self.blackjack = True
             return
         if self.get_score() > 21:
             self.busted = True
+            self.blackjack = False
 
     def add_card(self, card):
         card.value = self.start_card_value(card.rank)
+        card.__str__ = lambda self: "{} of {} is worth {}".format(
+            self.rank.title(), self.suit.title(), self.value)
         self._card_list.append(card)
-        self.reevaluate_score()
+        self.evaluate_score()
 
-    @property
     def card_list_display(self, show_all=True):
         card_list = self.card_list
         if not show_all:
-            card_list[0] = ""
-        return ", ".join(card_list)
+            card_list[0] = Card("Cards", "Unknown")
+            card_list[0].value = 0
+        return ", ".join(map(str, card_list))
+
+if __name__ == "__main__":
+    from card import Card
+    test_hand = Hand()
+    test_hand.add_card(Card("Spades", "Ace"))
+    assert test_hand.get_score() == 11
+    test_hand.add_card(Card("Clubs", "Ace"))
+    assert test_hand.get_score() == 12
+    test_hand.add_card(Card("Diamonds", "5"))
+    assert test_hand.get_score() == 17
+    assert test_hand.soft
+    assert not test_hand.blackjack
+    assert not test_hand.busted
+    test_hand.add_card(Card("Hearts", "Queen"))
+    assert test_hand.get_score() == 17
+    test_hand.add_card(Card("Hearts", "4"))
+    assert test_hand.get_score() == 21
+    assert not test_hand.soft
+    assert not test_hand.busted
+    assert test_hand.blackjack
+    test_hand.add_card(Card("Clubs", "Jack"))
+    assert test_hand.busted
+    assert not test_hand.blackjack
+    assert not test_hand.soft
+    assert test_hand.get_score() == 31
