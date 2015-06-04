@@ -1,10 +1,7 @@
 import re
 
-class Hand():
-    hand = []
 
-    def __init__(self, hand):
-        self.hand = hand
+class Hand():
 
     def hand_check(hand):
         points = 0
@@ -21,7 +18,6 @@ class Hand():
                 points += int(re.match(r'\d', card).group())
         return points
 
-
     def dealer_check(hand):
         points = 0
         for card in hand:
@@ -32,10 +28,3 @@ class Hand():
             elif re.match(r'\d*', card) is not None:
                 points += int(re.match(r'\d', card).group())
         return points
-
-class Player_hand(Hand):
-    pass
-
-
-class Dealer_hand(Hand):
-    pass

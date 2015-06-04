@@ -13,9 +13,6 @@ def dealer_protocol(hand, deck):
             hand.append(card_pick(deck))
     return hand
 
-#  a = ['jack of hearts', 'queen of spades']
-#  print(hand_check(a))
-
 
 def game():
     deck = Deck.Deck.deck_list
@@ -55,5 +52,3 @@ while True:
     else:
         print("You'll be back")
         exit()
-            # Hand.check
-            # initialize dealer, END()
