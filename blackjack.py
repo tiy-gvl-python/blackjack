@@ -55,8 +55,9 @@ class Player():
                 self.player_points = self.player_points + ace_decision
             elif "Jack" or "Queen" or "King" in self.player_hand:
                 self.player_points = self.player_points + 10
-            elif cards in face.range(0,11):
-                self.player_points + int(cards)
+            elif range(face(2,11)) in self.player_hand:
+                self.player_points = self.player_points + int(player_hand[0])
+
 
 
 
@@ -80,8 +81,8 @@ class Dealer():
                     self.dealer_points + 1
             elif "Jack" or "Queen" or "King":
                 self.dealer_points + 10
-            elif cards in face.range(0,11):
-                self.dealer_points + int(cards)
+            elif range(face(2,11)) in self.dealer_hand:
+                self.dealer_points = self.dealer_points + int(dealer_hand[0]):
 
 
 
