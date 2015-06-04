@@ -6,22 +6,22 @@ class Player():
         self.score = 100
 
     def start_game(self):
-        self.deck = Hand()
+        self.hand = Hand()
 
     def end_game(self):
         pass
 
     def add_card(self, card):
-        self.deck.add_card(card)
+        self.hand.add_card(card)
 
     def is_busted(self):
-        return self.deck.busted
+        return self.hand.busted
 
     def has_blackjack(self):
-        return self.deck.blackjack
+        return self.hand.blackjack
 
     def has_soft_hand(self):
-        return self.deck.soft
+        return self.hand.soft
 
     def bet(self, amount=10):
         self.score -= amount
@@ -31,8 +31,7 @@ class Player():
         self.score += amount
 
     def get_hand_value(self):
-        return self.hand.
+        return self.hand.get_score(False)
 
-    @property
     def display_hand(self):
-        return self.hand.card_list_display()
+        return self.hand.card_list_display(False)

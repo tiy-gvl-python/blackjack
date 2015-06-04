@@ -8,11 +8,12 @@ class Display():
 
     def print_display(self):
         os.system("clear")
-        map(print, self.lines)
+        for line in self.lines:
+            print(line)
         self.lines = self.lines[:self.number_of_persistent_lines]
 
     def set_display(self, message, position):
-        if position >= number_of_persistent_lines:
+        if position >= self.number_of_persistent_lines:
             return
         self.lines[position] = message
 

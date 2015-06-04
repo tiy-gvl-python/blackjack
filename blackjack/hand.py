@@ -1,3 +1,6 @@
+from card import Card
+
+
 class Hand():
     def __init__(self):
         self._card_list = []
@@ -8,9 +11,13 @@ class Hand():
 
     @property
     def card_list(self):
-        return self._card_list
+        return [card for card in self._card_list]
 
-    def get_score(self):
+    def get_score(self, hidden=False):
+        for card in self.card_list:
+            print(card)
+        if hidden:
+            return 0
         return sum([card.value for card in self.card_list])
 
     def start_card_value(self, rank):
@@ -39,16 +46,14 @@ class Hand():
 
     def add_card(self, card):
         card.value = self.start_card_value(card.rank)
-        card.__str__ = lambda self: "{} of {} is worth {}".format(
-            self.rank.title(), self.suit.title(), self.value)
+        print(card.value)
         self._card_list.append(card)
         self.evaluate_score()
 
-    def card_list_display(self, show_all=True):
+    def card_list_display(self, hidden=False):
         card_list = self.card_list
-        if not show_all:
+        if hidden and card_list:
             card_list[0] = Card("Cards", "Unknown")
-            card_list[0].value = 0
         return ", ".join(map(str, card_list))
 
 if __name__ == "__main__":

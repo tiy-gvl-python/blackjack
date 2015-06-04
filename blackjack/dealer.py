@@ -3,13 +3,16 @@ from player import Player
 
 class Dealer(Player):
     def __init__(self):
-        del self.bet
-        del self.add_score
+        pass
 
-    @property
-    def display_hand(self):
-        return self.hand.card_list_display(False)
+    def display_hand(self, hidden=False):
+        return self.hand.card_list_display(hidden)
 
-    @property
-    def display_full_hand(self):
-        return self.hand.card_list_display()
+    def bet(self):
+        pass
+
+    def add_score(self):
+        pass
+
+    def get_hand_value(self, hidden=False):
+        return self.hand.get_score(hidden)
