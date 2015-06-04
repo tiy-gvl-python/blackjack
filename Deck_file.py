@@ -21,19 +21,25 @@ class Deck:
     def init_deal(self):
         self.hand = random.sample(self.deck, 2)
         self.deck = self.remove_from_deck(self.hand)
+        self.dealer_hand = random.sample(self.deck, 2)
+        self.deck = self.remove_from_deck(self.dealer_hand)
         print("This is your hand", self.hand)
         return (self.hand)
 
-    def hitme(self):
+    def hitme(self, person):
         self.deal = random.choice(self.deck)
-        self.hand.append(self.deal)
-        print("This is your hand", self.hand)
+        if person == "dealer":
+            self.dealer_hand.append(self.deal)
+            # print("This is your hand", self.dealer_hand)
+        if person == "player":
+            self.hand.append(self.deal)
+            print("This is your hand", self.hand)
 
     def ask(self):
         self.hit_me_or = input("Hit me? or Stay? ")
         self.hit_me_or.lower()
         if self.hit_me_or == "hit me":
-            self.hitme()
+            self.hitme("player")
         elif self.hit_me_or == "stay":
             pass
         else:
