@@ -8,7 +8,7 @@ class Game():
     def __init__(self):
         self.player = Player()
         self.dealer = Dealer()
-        self.display = Display(7)
+        self.display = Display(8)
         self.pot = 0
 
     def print_display(self, wait=False):
@@ -111,6 +111,7 @@ class Game():
 
     def dealer_play(self):
         self.dealer.start_turn()
+        self.print_display(True)
         while self.dealer.get_hand_value() < 17:
             self.dealer.add_card(self.deal())
             if self.dealer.has_blackjack():
