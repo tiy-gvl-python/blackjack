@@ -1,11 +1,15 @@
 from hand import Hand
 
+
 class Player():
     def __init__(self):
         self.score = 100
 
     def start_game(self):
         self.deck = Hand()
+
+    def end_game(self):
+        pass
 
     def add_card(self, card):
         self.deck.add_card(card)
@@ -18,3 +22,7 @@ class Player():
 
     def has_soft_hand(self):
         return self.deck.soft
+
+    def bet(self, amount=10):
+        self.score -= amount
+        return amount
