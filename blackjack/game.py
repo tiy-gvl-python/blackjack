@@ -18,8 +18,8 @@ class Game():
             self.get_continue()
 
     def update_display(self, hidden=True):
-        display_list = ["Dealer:", self.dealer.display_hand(hidden),
-                        "Score: " + str(self.dealer.get_hand_value(hidden)) +
+        display_list = ["Dealer:", self.dealer.display_hand(),
+                        "Score: " + str(self.dealer.get_hand_value()) +
                         " | Pot: " + str(self.pot),
                         "- "*20, "You:", self.player.display_hand(),
                         "Score: " + str(self.player.get_hand_value()) +
@@ -32,28 +32,20 @@ class Game():
         self.pot = self.player.bet(self.get_bet_input())
         self.player.start_game()
         self.dealer.start_game()
-        self.add_message("Welcome to BlackJack!")
+        self.add_message("Welcome to Blackjack!")
         self.get_continue()
         self.initial_deal()
         if self.dealer.has_blackjack() and self.player.has_blackjack():
-            self.add_message("The round is a push.")
-            self.print_display(True)
-            return False
+            self.dealer.hidden = False
+            self.push("Both dealer and player have Blackjack.")
+            return self.get_input("hand")
         elif self.player.has_blackjack():
-            self.add_message("You have BlackJack!")
-            self.add_message("You win the hand!")
-            self.print_display(True)
-            self.add_message("You won {}.".format(self.bet))
-            self.player.add_score(self.bet)
-            self.bet = 0
-            self.print_display(True)
-            return False
+            self.player_wins("You have Blackjack!")
+            return self.get_input("hand")
         elif self.dealer.has_blackjack():
-            self.add_message("Dealer has BlackJack.")
-            self.add_message("You lose the hand.")
-            self.print_display(True)
-            self.bet = 0
-            return False
+            self.dealer.hidden = False
+            self.dealer_wins("Dealer has Blackjack.")
+            return self.get_input("hand")
         return self.play()
 
     def initial_deal(self):
@@ -108,7 +100,7 @@ class Game():
         while self.get_input("choice") == "hit":
             self.player.add_card(self.deal())
             if self.player.has_blackjack():
-                self.add_message("You have BlackJack!")
+                self.add_message("You have Blackjack!")
                 self.print_display(True)
                 return True
             elif self.player.is_busted():
@@ -118,10 +110,11 @@ class Game():
         return True
 
     def dealer_play(self):
+        self.dealer.start_turn()
         while self.dealer.get_hand_value() < 17:
             self.dealer.add_card(self.deal())
             if self.dealer.has_blackjack():
-                self.add_message("Dealer has BlackJack.")
+                self.add_message("Dealer has Blackjack.")
                 self.print_display(True)
                 break
             if self.dealer.is_busted():
@@ -134,31 +127,15 @@ class Game():
         if self.player_play():
             self.dealer_play()
         if self.dealer.get_hand_value() == self.player.get_hand_value():
-            self.add_message("The round is a push.")
-            self.print_display(True)
+            self.push()
         elif self.dealer.is_busted() or self.player.has_blackjack():
-            self.add_message("You win the hand!")
-            self.print_display(True)
-            self.add_message("You won {}.".format(self.pot))
-            self.player.add_score(self.bet)
-            self.bet = 0
-            self.print_display(True)
+            self.player_wins()
         elif self.dealer.has_blackjack() or self.player.is_busted():
-            self.add_message("You lose the hand.")
-            self.print_display(True)
-            print("I am here")
-            self.bet = 0
+            self.dealer_wins()
         elif self.player.get_hand_value() > self.dealer.get_hand_value():
-            self.add_message("You win the hand!")
-            self.print_display(True)
-            self.add_message("You won {}.".format(self.bet))
-            self.player.add_score(self.bet)
-            self.bet = 0
-            self.print_display(True)
+            self.player_wins()
         else:
-            self.add_message("You lose the hand.")
-            self.print_display(True)
-            self.bet = 0
+            self.dealer_wins()
         return (self.get_input("hand") == "y")
 
     def run(self):
@@ -169,3 +146,23 @@ class Game():
                 self.print_display(True)
                 return False
         return True
+
+    def player_wins(self, message=""):
+        self.add_message(message)
+        self.add_message("You win the hand!")
+        self.print_display(True)
+        self.add_message("You won {}!".format(self.pot * 2))
+        self.player.add_score(self.pot * 2)
+        self.pot = 0
+        self.print_display(True)
+
+    def dealer_wins(self, message=""):
+        self.add_message(message)
+        self.add_message("You lose the hand.")
+        self.print_display(True)
+        self.pot = 0
+
+    def push(self, message=""):
+        self.add_message(message)
+        self.add_message("The round is a push.")
+        self.print_display(True)
