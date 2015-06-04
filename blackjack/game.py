@@ -149,21 +149,27 @@ class Game():
         return True
 
     def player_wins(self, message=""):
-        self.add_message(message)
+        if message:
+            self.add_message(message)
         self.add_message("You win the hand!")
         self.print_display(True)
-        self.add_message("You won {}!".format(self.pot * 2))
-        self.player.add_score(self.pot * 2)
+        pot_multiplier = 2
+        if self.player.has_blackjack():
+            pot_multiplier = 3
+        self.add_message("You won {}!".format(self.pot * pot_multiplier))
+        self.player.add_score(self.pot * pot_multiplier)
         self.pot = 0
         self.print_display(True)
 
     def dealer_wins(self, message=""):
-        self.add_message(message)
+        if message:
+            self.add_message(message)
         self.add_message("You lose the hand.")
         self.print_display(True)
         self.pot = 0
 
     def push(self, message=""):
-        self.add_message(message)
+        if message:
+            self.add_message(message)
         self.add_message("The round is a push.")
         self.print_display(True)
