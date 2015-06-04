@@ -1,5 +1,11 @@
-"""
-The Dealer inherits from player.  It overwrites the display_hand method, and
-it does not have anything to do with bets.  It will also overwrite the input
-method, which will hit or stand according to the stand_value.
-"""
+from player import Player
+
+
+class Dealer(Player):
+    def __init__(self):
+        del self.bet
+        del self.add_score
+
+    @property
+    def display_hand(self):
+        return self.hand.card_list_display(False)
