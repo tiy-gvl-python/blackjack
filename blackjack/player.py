@@ -1,7 +1,20 @@
-"""
-The Player class is going to keep track of current "score" (or amount of
-money) as well as the current bet amount.  It will also handle player input (
-getting bet amounts, as well as asking if the player wants to hit or stand)
-The Player will also be responsible for keeping track of his current hand as
-well as displaying the hand when requested.
-"""
+from hand import Hand
+
+class Player():
+    def __init__(self):
+        self.score = 100
+
+    def start_game(self):
+        self.deck = Hand()
+
+    def add_card(self, card):
+        self.deck.add_card(card)
+
+    def is_busted(self):
+        return self.deck.busted
+
+    def has_blackjack(self):
+        return self.deck.blackjack
+
+    def has_soft_hand(self):
+        return self.deck.soft
