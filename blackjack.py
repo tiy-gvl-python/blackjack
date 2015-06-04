@@ -7,13 +7,13 @@ money = 100
 cost = 10
 
 
-def bankroll(money, cost):
+'''def bankroll(money, cost):
     if money >= 10:
         money -+ cost
         print(money)
         return True
     else:
-        return
+        return'''
 
 
 # Cards includes a list of 52 regular cards with no Jokers
@@ -79,9 +79,19 @@ def deal(player_hand, dealer_hand):
     print("{} : Your hand".format(player_hand))
     print("{} : Secret dealer hand for testing".format(dealer_hand))
 
+
+def player_hit_pass(player_hand):
+    player_input = input("'H'it or 'P'ass?").upper()
+    if player_input == "H":
+        while player_input == "H":
+            player_hand.append(get_new_card(player_hand, dealer_hand))
+            print("{} : Your hand".format(player_hand))
+        print(input("OK, hit ENTER for dealer's turn"))
+
+        
 deal(player_hand, dealer_hand)
 print("\n")
 print("\n")
-
+player_hit_pass(player_hand)
 
 # end
