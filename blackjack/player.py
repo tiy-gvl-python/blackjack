@@ -26,3 +26,10 @@ class Player():
     def bet(self, amount=10):
         self.score -= amount
         return amount
+
+    def add_score(self, amount):
+        self.score += amount
+
+    @property
+    def display_hand(self):
+        return self.hand.card_list_display()
