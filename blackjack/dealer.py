@@ -9,3 +9,7 @@ class Dealer(Player):
     @property
     def display_hand(self):
         return self.hand.card_list_display(False)
+
+    @property
+    def display_full_hand(self):
+        return self.hand.card_list_display()

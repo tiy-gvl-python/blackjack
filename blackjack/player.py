@@ -30,6 +30,9 @@ class Player():
     def add_score(self, amount):
         self.score += amount
 
+    def get_hand_value(self):
+        return self.hand.
+
     @property
     def display_hand(self):
         return self.hand.card_list_display()
