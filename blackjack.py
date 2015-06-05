@@ -64,14 +64,15 @@ class Player():
 
 
 class Dealer():
-    face = Hand.face
+    face = Cards.face
     dealer_hand = []
     dealer_points = 0
-    self.dealer_hand = dealer_hand
+
     def __init__(self):
         pass
     def __str__(self, dealer_hand, dealer_points):
         return "Dealers card: {}" + dealer_hand.index(0)
+
     def dealer_rules(self):
         for cards in dealer_hand:
             if "Ace" in self.dealer_hand:
@@ -82,7 +83,7 @@ class Dealer():
             elif "Jack" or "Queen" or "King":
                 self.dealer_points + 10
             elif range(face(2,11)) in self.dealer_hand:
-                self.dealer_points = self.dealer_points + int(dealer_hand[0]):
+                self.dealer_points = self.dealer_points + int(dealer_hand[0])
 
 
 
