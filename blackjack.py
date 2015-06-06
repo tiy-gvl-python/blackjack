@@ -105,14 +105,26 @@ class Game:
     def hit_or_stay(self):
         self.player_points = self.player.player_points
         self.dealer_points = self.dealer.dealer_points
+        game_over = False
+        stay = False
 
-        while self.dealer_points <= 16:
-            self.dealer.dealer_hand = self.dealer.dealer_hand + self.game_deck.pop()
+        while self.dealer_points <= 16 and game_over == False:
+            self.dealer.dealer_hand = self.dealer.dealer_hand.append(self.game_deck.pop())
 
-        while self.player_points <= 21:
+        while self.player_points < 21 and stay == False and game_over == False:
+            player_decision = input("[H]it or [S]tay? Please type H or S.  ").upper()
+            if player_decision == 'H:
+                self.player.player_hand = self.player.player_hand.append(self.game_deck.pop())
+            elif player_decision == 'S':
+                stay = True
+            else:
+                print("Invalid answer please press hit or stay")
+
+    
 
 
-            
+
+
 
 
 
