@@ -17,15 +17,6 @@ class Deck():
 
 
 
-class Hand():
-    hand = []
-
-
-
-    def __init__(self, hand):
-        self.hand = hand
-
-
 
 class Player():
     player_hand = []
@@ -33,6 +24,8 @@ class Player():
     player_points = 0
 
     def __init__(self):
+        self.player_hand = player_hand
+        self.player_points = player_points
         pass
 
     def __str__(self):
@@ -47,8 +40,8 @@ class Player():
 
         face = Cards.face
 
-        for cards in self.player_hand:
-            if "Ace" in self.player_hand:
+        for card in self.player_hand:
+            if "Ace" in card:
                 ace_decision = input("You have an ace please enter 1 or 11 ")
                 while ace_decision != 1 or 11:
                     ace_decision = input("Please enter 1 or 11 you drunk bastard. ")
@@ -57,7 +50,7 @@ class Player():
                 self.player_points = self.player_points + 10
             elif range(face(2,11)) in self.player_hand:
                 self.player_points = self.player_points + int(player_hand[0])
-
+        return self.player_points
 
 
 
@@ -68,31 +61,68 @@ class Dealer():
     dealer_hand = []
     dealer_points = 0
 
+
     def __init__(self):
-        pass
+        self.dealer_hand = dealer_hand
+        self.dealer_points = dealer_points
+
     def __str__(self, dealer_hand, dealer_points):
         return "Dealers card: {}" + dealer_hand.index(0)
 
     def dealer_rules(self):
-        for cards in dealer_hand:
-            if "Ace" in self.dealer_hand:
+        for card in self.dealer_hand:
+            if "Ace" in card:
                 if self.dealer_points <= 10:
                     self.dealer_points + 11
                 else:
                     self.dealer_points + 1
-            elif "Jack" or "Queen" or "King":
+            elif "Jack" or "Queen" or "King" in card:
                 self.dealer_points + 10
-            elif range(face(2,11)) in self.dealer_hand:
-                self.dealer_points = self.dealer_points + int(dealer_hand[0])
+            elif range(face(2,11)) in card:
+                self.dealer_points = self.dealer_points + int(card[0])
 
 
 
 
 
 
-# class Game:
+class Game:
 
-# game_deck = Deck.shuffled_deck
+    game_deck = Deck.shuffled_deck
+
+    new_game = False
+
+    def __init__(self):
+
+        self.player = Player()
+        self.dealer = Dealer()
+
+    def start_game(self):
+        self.new_game = True
+        self.dealer.dealer_hand = self.dealer.dealer_hand.append(self.game_deck.pop()+self.game_deck.pop())
+        self.player.player_hand = self.player.player_hand.append(self.game_deck.pop()+self.game_deck.pop())
+
+    def hit_or_stay(self):
+        self.player_points = self.player.player_points
+        self.dealer_points = self.dealer.dealer_points
+
+        while self.dealer_points <= 16:
+            self.dealer.dealer_hand = self.dealer.dealer_hand + self.game_deck.pop()
+
+        while self.player_points <= 21:
 
 
-#    def game_over(self):
+            
+
+
+
+    def end_game(self):
+        pass
+
+
+
+
+
+
+
+
