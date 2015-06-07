@@ -29,11 +29,11 @@ class Game():
 
     def start_round(self):
         self.deck = Deck()
-        self.pot = self.player.bet(self.get_bet_input())
         self.player.start_game()
         self.dealer.start_game()
         self.add_message("Welcome to Blackjack!")
-        self.get_continue()
+        self.print_display(True)
+        self.pot = self.player.bet(self.get_input("bet"))
         self.initial_deal()
         if self.dealer.has_blackjack() and self.player.has_blackjack():
             self.dealer.hidden = False
@@ -65,6 +65,8 @@ class Game():
             return self.get_stand_or_hit()
 
     def get_hand_input(self):
+        if not self.enough_money():
+            return False
         while True:
             string = "Do you want to play another hand? (y/n) > "
             value = input(string).lower()
@@ -74,9 +76,16 @@ class Game():
             self.print_display()
 
     def get_bet_input(self):
-        # return input("How much do you want to bet?")
-        self.add_message("Betting 10.")
-        return 10
+        while True:
+            bet = input("How much do you want to bet? > ")
+            if bet.isdigit() and bet != "0":
+                if int(bet) > self.player.score:
+                    self.add_message("You don't have that much.")
+                    self.print_display()
+                    continue
+                return int(bet)
+            self.add_message("Please enter a positive integer.")
+            self.print_display()
 
     def get_stand_or_hit(self):
         while True:
@@ -113,6 +122,7 @@ class Game():
         self.dealer.start_turn()
         self.print_display(True)
         while self.dealer.get_hand_value() < 17:
+            self.add_message("Dealer hits.")
             self.dealer.add_card(self.deal())
             if self.dealer.has_blackjack():
                 self.add_message("Dealer has Blackjack.")
@@ -123,6 +133,8 @@ class Game():
                 self.print_display(True)
                 break
             self.print_display(True)
+        self.add_message("Dealer stands.")
+        self.print_display(True)
 
     def play(self):
         if self.player_play():
@@ -141,11 +153,7 @@ class Game():
 
     def run(self):
         while self.start_round():
-            if self.player.score < 10:
-                self.add_message("You don't have enough money to continue.")
-                self.add_message("Thank you for playing.")
-                self.print_display(True)
-                return False
+            pass
         return True
 
     def player_wins(self, message=""):
@@ -173,3 +181,11 @@ class Game():
             self.add_message(message)
         self.add_message("The round is a push.")
         self.print_display(True)
+
+    def enough_money(self):
+        if self.player.score < 1:
+            self.add_message("You don't have enough money to continue.")
+            self.add_message("Thank you for playing.")
+            self.print_display(True)
+            return False
+        return True
