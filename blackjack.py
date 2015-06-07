@@ -19,14 +19,12 @@ class Deck():
 
 
 class Player():
-    player_hand = []
 
-    player_points = 0
 
     def __init__(self):
-        self.player_hand = player_hand
-        self.player_points = player_points
-        pass
+        self.player_hand = []
+        self.player_points = 0
+
 
     def __str__(self):
         return "Your cards: {} \n Your points: ".format(self.player_hand, self.player_points)
@@ -58,13 +56,12 @@ class Player():
 
 class Dealer():
     face = Cards.face
-    dealer_hand = []
-    dealer_points = 0
+
 
 
     def __init__(self):
-        self.dealer_hand = dealer_hand
-        self.dealer_points = dealer_points
+        self.dealer_hand = []
+        self.dealer_points = 0
 
     def __str__(self, dealer_hand, dealer_points):
         return "Dealers card: {}" + dealer_hand.index(0)
@@ -88,34 +85,47 @@ class Dealer():
 
 class Game:
 
-    game_deck = Deck.shuffled_deck
-
-    new_game = False
-
     def __init__(self):
 
+
+
+
+        self.game_deck = Deck.shuffled_deck
+
+    
+
+
+        self.new_game = False
+
+
+
         self.player = Player()
+
         self.dealer = Dealer()
+
         self.start_game()
+        #self.hit_or_stay()
 
     def start_game(self):
+        print("Welcome to BlackJack")
         self.new_game = True
         self.dealer.dealer_hand = self.dealer.dealer_hand.append(self.game_deck.pop()+self.game_deck.pop())
         self.player.player_hand = self.player.player_hand.append(self.game_deck.pop()+self.game_deck.pop())
 
     def hit_or_stay(self):
+
         self.player_points = self.player.player_points
         self.dealer_points = self.dealer.dealer_points
         game_over = False
         stay = False
 
         while self.dealer_points <= 16 and game_over == False:
-            self.dealer.dealer_hand = self.dealer.dealer_hand.append(self.game_deck.pop())
+            self.dealer.dealer_hand = self.dealer.dealer_hand + self.game_deck.pop()
 
         while self.player_points < 21 and stay == False and game_over == False:
             player_decision = input("[H]it or [S]tay? Please type H or S.  ").upper()
             if player_decision == 'H':
-                self.player.player_hand = self.player.player_hand.append(self.game_deck.pop())
+                self.player.player_hand = self.player.player_hand + self.game_deck.pop()
             elif player_decision == 'S':
                 stay = True
             else:
@@ -126,10 +136,13 @@ class Game:
 
 
 class Main:
-    
-    game = Game()
+
+    def __init__(self):
+
+        self.dealer = Dealer()
+        self.player = Player()
+        self.game = Game()
 
 
-
-
-
+game = Main()
+game
