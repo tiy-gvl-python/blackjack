@@ -89,11 +89,11 @@ class Game():
 
     def get_stand_or_hit(self):
         while True:
-            string = "Do you want to stand or hit? > "
+            string = "Do you want to stand, hit, or double down? > "
             value = input(string).lower()
-            if value in ("stand", "hit"):
+            if value in ("stand", "hit", "double down"):
                 return value
-            self.add_message("Please enter 'stand' or 'hit'")
+            self.add_message("Please enter 'stand', 'hit', or 'double down'.")
             self.print_display()
 
     def add_message(self, message):
@@ -106,17 +106,37 @@ class Game():
         return self.deck.draw()
 
     def player_play(self):
-        while self.get_input("choice") == "hit":
-            self.player.add_card(self.deal())
-            if self.player.has_blackjack():
-                self.add_message("You have Blackjack!")
+        while True:
+            choice = self.get_input("choice")
+            if choice == "hit":
+                self.player.add_card(self.deal())
+                if self.player.has_blackjack():
+                    self.add_message("You have Blackjack!")
+                    self.print_display(True)
+                    return True
+                elif self.player.is_busted():
+                    self.add_message("You have busted.")
+                    self.print_display(True)
+                    return False
+                continue
+            if choice == "double down":
+                if self.player.score < self.pot:
+                    self.add_message("You don't have enough money.")
+                    self.print_display(True)
+                    continue
+                self.add_message("Doubling down.")
+                self.pot += self.player.bet(self.pot)
                 self.print_display(True)
-                return True
-            elif self.player.is_busted():
-                self.add_message("You have busted.")
-                self.print_display(True)
-                return False
-        return True
+                self.player.add_card(self.deal())
+                if self.player.has_blackjack():
+                    self.add_message("You have Blackjack!")
+                    self.print_display(True)
+                    return True
+                elif self.player.is_busted():
+                    self.add_message("You have busted.")
+                    self.print_display(True)
+                    return False
+            return True
 
     def dealer_play(self):
         self.dealer.start_turn()
@@ -127,11 +147,11 @@ class Game():
             if self.dealer.has_blackjack():
                 self.add_message("Dealer has Blackjack.")
                 self.print_display(True)
-                break
+                return
             if self.dealer.is_busted():
                 self.add_message("Dealer is busted!")
                 self.print_display(True)
-                break
+                return
             self.print_display(True)
         self.add_message("Dealer stands.")
         self.print_display(True)

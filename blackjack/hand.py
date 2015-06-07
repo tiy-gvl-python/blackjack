@@ -14,8 +14,6 @@ class Hand():
         return [card for card in self._card_list]
 
     def get_score(self, hidden=False):
-        for card in self.card_list:
-            print(card)
         if hidden:
             return 0
         return sum([card.value for card in self.card_list])
@@ -46,7 +44,6 @@ class Hand():
 
     def add_card(self, card):
         card.value = self.start_card_value(card.rank)
-        print(card.value)
         self._card_list.append(card)
         self.evaluate_score()
 
