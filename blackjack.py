@@ -96,6 +96,7 @@ class Game:
 
         self.player = Player()
         self.dealer = Dealer()
+        self.start_game()
 
     def start_game(self):
         self.new_game = True
@@ -113,26 +114,20 @@ class Game:
 
         while self.player_points < 21 and stay == False and game_over == False:
             player_decision = input("[H]it or [S]tay? Please type H or S.  ").upper()
-            if player_decision == 'H:
+            if player_decision == 'H':
                 self.player.player_hand = self.player.player_hand.append(self.game_deck.pop())
             elif player_decision == 'S':
                 stay = True
             else:
                 print("Invalid answer please press hit or stay")
 
+
+
+
+
+class Main:
     
-
-
-
-
-
-
-
-    def end_game(self):
-        pass
-
-
-
+    game = Game()
 
 
 
