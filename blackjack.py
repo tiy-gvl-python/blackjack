@@ -64,6 +64,7 @@ money -= 10
 print("you currently have ${}".format(money))
 print("\n")
 print("Hit = 'H', and Pass = 'P'")
+
 setup_deck(deck, whole_deck)
 
 player_hand = []
@@ -83,12 +84,13 @@ def deal(player_hand, dealer_hand):
 def player_hit_pass(player_hand):
     player_input = input("'H'it or 'P'ass?").upper()
     if player_input == "H":
-        while player_input == "H":
-            player_hand.append(get_new_card(player_hand, dealer_hand))
-            print("{} : Your hand".format(player_hand))
-        print(input("OK, hit ENTER for dealer's turn"))
+        # while player_input == "H":
+        player_hand.append(get_new_card(player_hand, dealer_hand))
+        print("{} : Your hand".format(player_hand))
+    print("\n")
+    print(input("OK, hit ENTER for dealer's turn"))
 
-        
+
 deal(player_hand, dealer_hand)
 print("\n")
 print("\n")
