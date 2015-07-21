@@ -16,10 +16,7 @@ cost = 10
         return'''
 
 
-# Cards includes a list of 52 regular cards with no Jokers
-
-
-whole_deck = ['A of clubs', 'K of clubs', 'Q of clubs', 'J of clubs',
+WHOLE_deck = ['A of clubs', 'K of clubs', 'Q of clubs', 'J of clubs',
               '10 of clubs', '9 of clubs', '8 of clubs', '7 of clubs',
               '6 of clubs', '5 of clubs', '4 of clubs', '3 of clubs',
               '2 of clubs', 'A of hearts', 'K of hearts', 'Q of hearts',
