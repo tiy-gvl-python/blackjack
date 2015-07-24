@@ -1,4 +1,0 @@
-# Blackjack
-# Jeff Hacker
-
-*
