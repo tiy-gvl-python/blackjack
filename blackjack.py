@@ -4,7 +4,9 @@ import random
 class Deck():
 
     def __init__(self, hand):
-        self.card_dict = {"Ace": 1, "Two": 2, "Three": 3, "Four": 4, "Five": 5, "Six": 6, "Seven": 7, "Eight": 8, "Nine": 9, "King": 10, "Queen": 10}
+        self.card_dict = {"Ace": 1, "Two": 2, "Three": 3, "Four": 4, "Five": 5,
+                          "Six": 6, "Seven": 7, "Eight": 8, "Nine": 9,
+                          "King": 10, "Queen": 10}
         self.card()
         self.card_value()
         self.hand = hand
@@ -14,14 +16,12 @@ class Deck():
 
     def card(self):
         self.deck = list(self.card_dict.keys()) * 4
-        print(self.deck)
 
     def card_value(self):
         self.deck_value = list(self.card_dict.values()) * 4
-        print(self.deck_value)
 
     def shuffle(self):
-        random.shuffle(self.deck)
+        random.shuffle(self.deck_value)
 
     def deal_comp(self):
         self.hand.computer_hand.append(self.deck_value[1])
@@ -37,37 +37,43 @@ class Hand():
         self.player_hand = []
         self.clear_play_hand()
         self.clear_comp_hand()
+        self.sum_comp()
+        self.sum_play()
 
-    def sum_hand(self):
+    def sum_comp(self):
         self.sum_computer = sum(self.computer_hand)
+
+    def sum_play(self):
         self.sum_player = sum(self.player_hand)
 
     def clear_play_hand(self):
-            del self.player_hand[:]
+        del self.player_hand[:]
 
     def clear_comp_hand(self):
-            del self.computer_hand[:]
+        del self.computer_hand[:]
 
 
 class Dealer():
 
-    def __init__(self, hand, deck, player):
+    def __init__(self, hand, deck):
         self.hand = hand
         self.deck = deck
-        self.player = player
 
     def hit_logic(self):
-        hit is True
-        while hit is True:
-            self.shuffle()
-            self.deal_comp()
-            if self.sum_computer > 16:
-                hit is False
+        while True:
+            self.deck.shuffle()
+            self.deck.deal_comp()
+            self.hand.sum_comp()
+            if self.hand.sum_computer >= 16:
+                break
+            else:
+                continue
 
     def stand_logic(self):
-        stand is False
-        if self.sum_computer > 16 and < 22:
-            stand is True
+        if self.hand.sum_computer >= 16 and self.hand.sum_computer < 22:
+            stand = True
+        else:
+            stand = False
 
 
 class Player():
@@ -78,22 +84,47 @@ class Player():
         self.dealer = dealer
 
     def choose_logic(self):
-        choose = raw_input("Press H to hit or S to stand.")
-        if choose = "h" or "H":
-            self.shuffle()
-            self.deal_play()
-            print(self.player_hand)
-        else:
-            stand is True
+        while True:
+            self.deck.shuffle()
+            self.deck.deal_play()
+            print(self.hand.player_hand)
+            x = input("Press H to hit or something else to stand.")
+            if x == "H":
+                continue
+            else:
+                break
+
 
 class Game():
 
-    
+    def __init__(self, hand, deck, dealer, player):
+        self.hand = hand
+        self.deck = deck
+        self.dealer = dealer
+        self.player = player
 
+    def game_logic(self):
+        x = True
+        stand = None
+        while x == True:
+            deck.card_value()
+            dealer.hit_logic()
+            dealer.stand_logic()
+            player.choose_logic()
+            if hand.computer_hand >= hand.player_hand:
+                print('computer wins!')
+                print(hand.computer_hand)
+                print(hand.player_hand)
+                x = False
+            else:
+                print('player wins!')
+                print(hand.computer_hand)
+                print(hand.player_hand)
+                x = False
 
-
-
-player = Player()
-dealer = Dealer(hand)
 hand = Hand()
 deck = Deck(hand)
+dealer = Dealer(hand, deck)
+player = Player(hand, deck, dealer)
+game = Game(hand, deck, dealer, player)
+game.game_logic()
