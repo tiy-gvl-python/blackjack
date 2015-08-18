@@ -43,7 +43,6 @@ class Game:
     def begin_game(self):
         import os
         os.system("clear")
-
         print ("Player has ${} to play with:".format(player1.money))
         print("Dealing cards...")
         for _ in range(2):
