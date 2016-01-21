@@ -1,4 +1,4 @@
 # Blackjack
 
-* [Part 1](README_1.md)
-* [Part 2](README_2.md)
+## blackjack.ipynb: An Ipython Notebook version of BlackJack
+## blackjack.py: A self-playing version of BlackJack.  Run with Python3
