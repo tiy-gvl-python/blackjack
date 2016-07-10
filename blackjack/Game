@@ -1,0 +1,7 @@
+class game:
+''' Manages game flow, logic, for playing the game.
+    Interfaces with the user to print out the current state of the match.
+'''
+Collaborators:
+Player
+Dealer

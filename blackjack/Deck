@@ -1,0 +1,9 @@
+class Deck:
+    ''' The deck class will provide the logic to draw, shuffle, and deal.
+        Will control the size of the deck.
+    '''
+    Collaborators:
+    Card
+    Hand
+    Player
+    Dealer

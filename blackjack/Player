@@ -1,0 +1,7 @@
+class Player:
+  ''' *Allows the user to decide when to hit, and show cards.
+      *Also allows user to input difficulty.
+  '''
+  Collaborators:
+  Hand
+  Game

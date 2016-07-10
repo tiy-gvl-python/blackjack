@@ -1,0 +1,21 @@
+class hand:
+    ''' *The class hand adds, scores the user hand.
+        *Controls the maximum amount of cards in a hand.
+    '''
+    Collaborators:
+    Player
+    Dealer
+while stand is True:
+          if self.sum_computer > self.sum_player:
+              print(Dealer Won.)
+          if self.sum_computer < self.sum_player:
+              print(You Won '21'!)
+          if self.sum_computer == self.sum_player:
+              print(You Tied.)
+
+if self.sum_computer > 21:
+        del self.computer_hand[:]
+        print(Player Won!)
+    if self.sum_player > 21:
+        del self.player_hand[:]
+        print(You lost.)

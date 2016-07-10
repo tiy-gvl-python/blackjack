@@ -1,0 +1,17 @@
+BlackJack README
+
+A game where the player tries to get his deck of cards to add up to 21.
+Only two player:
+
+1. The Player is issued two cards.
+- One card up and one down.
+2. The Dealer is issued two cards.
+- One card up and one down.
+3. Dealer and Player add values of cards.
+- Computer calculates dealers choice of hit or bust.
+- Player chooses to hit or bust.
+4. If either go over 21 the other wins.
+5. If both are under 21 calculate who is closest, they win.
+
+
+This Blackjack design is separated into seven classes each of which are identified by their name in this directory.
